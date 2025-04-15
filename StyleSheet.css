@@ -35,12 +35,27 @@ nav {
             text-decoration: underline;
         }
 
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        nav a.active {
+            text-decoration: underline;
+        }
+        
+        nav a:hover {
+            color: #ddd; /* Vagy bármilyen más hover szín */
+        }
+
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: relative;
+    position: fixed;
     width: 100%;
     bottom: 0;
 }
