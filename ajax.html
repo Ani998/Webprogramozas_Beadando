@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX példa</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+</head>
+<body>
+    <header>
+        <h1>AJAX - CRUD műveletek</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="table.html">Táblázat</a></li>
+            <li><a href="Html5.html">HTML5 Menük</a></li>
+            <li><a href="chartjs.html">ChartJS Menü</a></li>
+            <li><a href="ajax.html" class="active">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>CRUD űrlap</h2>
+        <label>ID:</label>
+        <input type="number" id="id"><br>
+
+        <label>Név:</label>
+        <input type="text" id="name"><br>
+
+        <label>Magasság:</label>
+        <input type="number" id="height"><br>
+
+        <label>Súly:</label>
+        <input type="number" id="weight"><br>
+
+        <button onclick="createData()">Hozzáadás</button>
+        <button onclick="getDataForId()">Adatok lekérése ID alapján</button>
+        <button onclick="updateData()">Módosítás</button>
+        <button onclick="deleteData()">Törlés</button>
+
+        <h3>Adatok:</h3>
+        <div id="dataOutput"></div>
+        <h3>Statisztika (height):</h3>
+        <div id="statsOutput"></div>
+    </div>
+
+    <footer>
+        <p>Ondó Vivien - O4NEQB</p>
+        <p>Trinyik Anikó - EA1HYA</p>
+    </footer>
+
+    <script src="ajax.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>ChartJS Menü</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>ChartJS Példa</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="table.html">Táblázat</a></li>
+            <li><a href="Html5.html">HTML5 Menük</a></li>
+            <li><a href="chartjs.html" class="active">ChartJS Menü</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+    <aside></aside>
+    <section>
+        <table id="numberTable" border="1">
+            <tbody>
+                <tr><td>12</td><td>34</td><td>22</td><td>41</td><td>8</td></tr>
+                <tr><td>3</td><td>15</td><td>28</td><td>9</td><td>50</td></tr>
+                <tr><td>25</td><td>30</td><td>17</td><td>38</td><td>11</td></tr>
+                <tr><td>40</td><td>20</td><td>5</td><td>8</td><td>16</td></tr>
+                <tr><td>7</td><td>14</td><td>19</td><td>21</td><td>26</td></tr>
+            </tbody>
+        </table>
+        <p>Kattints egy sorra, hogy megjelenjen a diagram!</p>
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </section>
+    <footer>
+        <p>Ondó Vivien - O4NEQB </p>
+        <p>Trinyik Anikó - EA1HYA </p>
+    </footer>
+
+    <script>
+        const rows = document.querySelectorAll("#numberTable tr");
+        let chart;
+
+        rows.forEach((row, index) => {
+            row.addEventListener("click", () => {
+                const values = Array.from(row.children).map(td => parseInt(td.textContent));
+
+                if (chart) chart.destroy();
+
+                const ctx = document.getElementById("myChart").getContext("2d");
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["1", "2", "3", "4", "5"],
+                        datasets: [{
+                            label: `Sor ${index + 1} adatai`,
+                            data: values,
+                            borderColor: 'blue',
+                            backgroundColor: 'lightblue',
+                            fill: false
+                        }]
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
