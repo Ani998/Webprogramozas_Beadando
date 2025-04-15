@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Creating the page structure with new HTML5 tags</title>
+    <link type="text/css" rel="stylesheet" href="StyleSheet.css">
+</head>
+<body>
+    <header>
+        <h1>HTML5 API Menük</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Főoldal</a></li>
+            <li><a href="table.html">Táblázat</a></li>
+            <li><a href="Html5.html">HTML5 Menük</a></li>
+            <li><a href="chartjs.html">ChartJS Menü</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+
+
+    <div id="content">
+        <h2>Web Storage Példa</h2>
+        <button onclick="saveData()">Adatok mentése a Web Storage-ba</button>
+        <button onclick="loadData()">Adatok betöltése a Web Storage-ból</button>
+        <div id="storageOutput"></div>
+    </div>
+
+    <footer>
+        <p>Ondó Vivien - O4NEQB </p>
+        <p>Trinyik Anikó - EA1HYA </p>>
+    </footer>
+
+    <script>
+        function saveData() {
+            localStorage.setItem('username', 'JohnDoe');
+            alert('Adatok elmentve!');
+        }
+
+        function loadData() {
+            const username = localStorage.getItem('username');
+            document.getElementById('storageOutput').textContent = 'Mentett név: ' + username;
+        }
+    </script>
+</body>
+</html>

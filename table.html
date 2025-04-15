@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Creating the page structure with new HTML5 tags</title>
+    <link type="text/css" rel="stylesheet" href="StyleSheet.css">
+</head>
+<body>
+    <header>
+        <h1>CRUD táblázat</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Főoldal</a></li>
+            <li><a href="table.html">Táblázat</a></li>
+            <li><a href="Html5.html">HTML5 Menük</a></li>
+            <li><a href="chartjs.html">ChartJS Menü</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>Adatok kezelése</h2>
+
+        <!-- Szűrőmező a táblázat felett -->
+        <label for="search">Szűrés:</label>
+        <input type="text" id="search" placeholder="Keresés a táblázatban..." onkeyup="filterTable()">
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Név <button onclick="sortTable(0)">↑↓</button></th>
+                    <th>Életkor <button onclick="sortTable(1)">↑↓</button></th>
+                    <th>Magasság <button onclick="sortTable(2)">↑↓</button></th>
+                    <th>Email cím <button onclick="sortTable(2)">↑↓</button></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <!-- A táblázat sorai itt jelennek meg dinamikusan -->
+            </tbody>
+        </table>
+
+        <section>
+        <form id="data-form">
+            <label for="name">Név:</label>
+            <input type="text" id="name" required minlength="4"><br>
+
+            <label for="age">Életkor:</label>
+            <input type="number" id="age" required min="1" max="120"><br>
+
+            <label for="height">Magasság:</label>
+            <input type="number" id="height" required min="0"><br>
+
+            <label for="email">Email cím:</label>
+            <input type="email" id="email"><br>
+
+            <button type="submit">Adat hozzáadása</button>
+        </form>
+    </section>
+
+        <script src="table.js"></script>
+    </div>
+
+    <footer>
+        <p>Ondó Vivien - O4NEQB </p>
+        <p>Trinyik Anikó - EA1HYA </p>
+    </footer>
+</body>
+</html>
