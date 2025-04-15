@@ -24,17 +24,27 @@
 
     <div class="content">
         <h2>CRUD űrlap</h2>
+
+        <div class="form-container">
+            <div class="form-row">
         <label>ID:</label>
         <input type="number" id="id"><br>
+    </div>
 
+        <div class="form-row">
         <label>Név:</label>
         <input type="text" id="name"><br>
+    </div>
 
+        <div class="form-row">
         <label>Magasság:</label>
         <input type="number" id="height"><br>
+    </div>
 
+        <div class="form-row">
         <label>Súly:</label>
         <input type="number" id="weight"><br>
+    </div>
 
         <button onclick="createData()">Hozzáadás</button>
         <button onclick="getDataForId()">Adatok lekérése ID alapján</button>
@@ -45,6 +55,7 @@
         <div id="dataOutput"></div>
         <h3>Statisztika (height):</h3>
         <div id="statsOutput"></div>
+    </div>
     </div>
 
     <footer>
