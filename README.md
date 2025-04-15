@@ -1,2 +1,1 @@
-# hello_world
- elso_feladat
+Webprogramozás beadandó
