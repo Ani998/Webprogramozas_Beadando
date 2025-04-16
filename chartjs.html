@@ -5,14 +5,41 @@
     <title>ChartJS Menü</title>
     <link rel="stylesheet" href="StyleSheet.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #numberTable {
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        #numberTable td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #999;
+            cursor: pointer;
+        }
+
+        #numberTable tr:hover {
+            background-color: #eef;
+        }
+
+        #myChart {
+            display: block;
+            margin: 30px auto;
+        }
+
+        section {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>ChartJS Példa</h1>
     </header>
+
     <nav>
         <ul>
-            <li><a href="index.html" >Főoldal</a></li>
+            <li><a href="index.html">Főoldal</a></li>
             <li><a href="table.html">Táblázat</a></li>
             <li><a href="Html5.html">HTML5 Menük</a></li>
             <li><a href="chartjs.html" class="active">ChartJS Menü</a></li>
@@ -21,9 +48,11 @@
             <li><a href="react.html">React</a></li>
         </ul>
     </nav>
+
     <aside></aside>
+
     <section>
-        <table id="numberTable" border="1">
+        <table id="numberTable">
             <tbody>
                 <tr><td>12</td><td>34</td><td>22</td><td>41</td><td>8</td></tr>
                 <tr><td>3</td><td>15</td><td>28</td><td>9</td><td>50</td></tr>
@@ -35,9 +64,10 @@
         <p>Kattints egy sorra, hogy megjelenjen a diagram!</p>
         <canvas id="myChart" width="400" height="200"></canvas>
     </section>
+
     <footer>
-        <p>Ondó Vivien - O4NEQB </p>
-        <p>Trinyik Anikó - EA1HYA </p>
+        <p>Ondó Vivien - O4NEQB</p>
+        <p>Trinyik Anikó - EA1HYA</p>
     </footer>
 
     <script>
@@ -54,14 +84,25 @@
                 chart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: ["1", "2", "3", "4", "5"],
+                        labels: ["Elem 1", "Elem 2", "Elem 3", "Elem 4", "Elem 5"],
                         datasets: [{
                             label: `Sor ${index + 1} adatai`,
                             data: values,
                             borderColor: 'blue',
                             backgroundColor: 'lightblue',
-                            fill: false
+                            tension: 0.3, // enyhe görbület
+                            fill: false,
+                            pointRadius: 5,
+                            pointBackgroundColor: 'blue'
                         }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
                     }
                 });
             });
