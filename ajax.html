@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>AJAX példa</title>
+    <title>AJAX CRUD alkalmazás</title>
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
@@ -27,35 +27,35 @@
 
         <div class="form-container">
             <div class="form-row">
-        <label>ID:</label>
-        <input type="number" id="id"><br>
-    </div>
+                <label>ID:</label>
+                <input type="number" id="id"><br>
+            </div>
 
-        <div class="form-row">
-        <label>Név:</label>
-        <input type="text" id="name"><br>
-    </div>
+            <div class="form-row">
+                <label>Név:</label>
+                <input type="text" id="name"><br>
+            </div>
 
-        <div class="form-row">
-        <label>Magasság:</label>
-        <input type="number" id="height"><br>
-    </div>
+            <div class="form-row">
+                <label>Magasság:</label>
+                <input type="number" id="height"><br>
+            </div>
 
-        <div class="form-row">
-        <label>Súly:</label>
-        <input type="number" id="weight"><br>
-    </div>
+            <div class="form-row">
+                <label>Súly:</label>
+                <input type="number" id="weight"><br>
+            </div>
 
-        <button onclick="createData()">Hozzáadás</button>
-        <button onclick="getDataForId()">Adatok lekérése ID alapján</button>
-        <button onclick="updateData()">Módosítás</button>
-        <button onclick="deleteData()">Törlés</button>
+            <button onclick="createData()">Hozzáadás</button>
+            <button onclick="getDataForId()">Adatok lekérése ID alapján</button>
+            <button onclick="updateData()">Módosítás</button>
 
-        <h3>Adatok:</h3>
-        <div id="dataOutput"></div>
-        <h3>Statisztika (height):</h3>
-        <div id="statsOutput"></div>
-    </div>
+            <h3>Adatok:</h3>
+            <form id="deleteForm">
+                <div id="dataOutput"></div>
+                <button type="submit">Kijelölt törlése</button>
+            </form>
+        </div>
     </div>
 
     <footer>
