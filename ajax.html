@@ -28,22 +28,22 @@
         <div class="form-container">
             <div class="form-row">
                 <label>ID:</label>
-                <input type="number" id="id"><br>
+                <input type="number" id="id" required minlength="4"><br>
             </div>
 
             <div class="form-row">
                 <label>Név:</label>
-                <input type="text" id="name"><br>
+                <input type="text" id="name" required minlength="4"><br>
             </div>
 
             <div class="form-row">
-                <label>Magasság:</label>
-                <input type="number" id="height"><br>
+                <label>Magasság(cm):</label>
+                <input type="number" id="height" required min="20" max="220"><br>
             </div>
 
             <div class="form-row">
                 <label>Súly:</label>
-                <input type="number" id="weight"><br>
+                <input type="number" id="weight" required min="0" max="610"><br>
             </div>
 
             <button onclick="createData()">Hozzáadás</button>

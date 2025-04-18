@@ -1,57 +1,204 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="utf-8">
-    <title>Creating the page structure with new HTML5 tags</title>
-    <link type="text/css" rel="stylesheet" href="StyleSheet.css">
+    <meta charset="UTF-8">
+    <title>HTML5 Menük</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button.nav-btn {
+      margin: 5px; padding: 10px 15px;
+      background-color: #007BFF; color: white;
+      border: none; border-radius: 5px;
+      cursor: pointer;
+    }
+    button.nav-btn:hover {
+      background-color: #0056b3;
+    }
+    section {
+      display: none;
+      margin-top: 30px;
+    }
+    section.active {
+      display: block;
+    }
+    canvas { border: 1px solid red; }
+    #dropTarget { width: 400px; height: 300px; border: 1px solid #aaa; margin-top: 10px; }
+  </style>
 </head>
 <body>
+
     <header>
-        <h1>HTML5 API Menük</h1>
+        <h1>HTML5</h1>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html" >Főoldal</a></li>
-            <li><a href="table.html">Táblázat</a></li>
-            <li><a href="Html5.html" class="active">HTML5 Menük</a></li>
-            <li><a href="chartjs.html">ChartJS Menü</a></li>
-            <li><a href="ajax.html">AJAX</a></li>
-            <li><a href="oojs.html">OOJS</a></li>
-            <li><a href="react.html">React</a></li>
-        </ul>
-    </nav>
+<nav>
 
-    <section>
-    <div id="content">
-        <h2>Web Storage Példa</h2>
-        <button onclick="saveData()">Adatok mentése a Web Storage-ba</button>
-        <button onclick="loadData()">Adatok betöltése a Web Storage-ból</button>
-        <div id="storageOutput"></div>
-    </div>
+    <ul>
+        <li><a href="index.html" >Főoldal</a></li>
+        <li><a href="table.html">Táblázat</a></li>
+        <li><a href="Html5.html" class="active">HTML5 Menük</a></li>
+        <li><a href="chartjs.html">ChartJS Menü</a></li>
+        <li><a href="ajax.html">AJAX</a></li>
+        <li><a href="oojs.html">OOJS</a></li>
+        <li><a href="react.html">React</a></li>
+    </ul>
+</nav>
+
+<!-- Gombos navigáció -->
+<div id="navigation">
+  <button class="nav-btn" onclick="showSection('sessionStorage')">Session Storage</button>
+  <button class="nav-btn" onclick="showSection('localStorage')">Local Storage</button>
+  <button class="nav-btn" onclick="showSection('webWorker')">Web Worker</button>
+  <button class="nav-btn" onclick="showSection('sse')">SSE</button>
+  <button class="nav-btn" onclick="showSection('dragDrop')">Drag & Drop</button>
+  <button class="nav-btn" onclick="showSection('canvas')">Canvas</button>
+  <button class="nav-btn" onclick="showSection('svg')">SVG</button>
+</div>
+
+<!-- Session storage -->
+<section id="sessionStorage">
+  <h2>Session Storage</h2>
+  <script type="text/javascript"> 
+    if( sessionStorage.hits ) 
+    sessionStorage.hits = Number(sessionStorage.hits) +1; 
+    else 
+    sessionStorage.hits = 1; 
+    document.write("Total Hits :" + sessionStorage.hits ); 
+    </script> 
+  <p>Frissítsd az oldalt, hogy növeld a számlálót. Ha bezárod és újra megnyitod, újrakezdődik.</p>
 </section>
 
-<section>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus eos facilis fuga consequuntur, culpa nesciunt, sed reiciendis doloribus quisquam nam ea. Molestiae et exercitationem maiores! Officiis eos libero quos soluta!
-    </p>
+<!-- Local storage -->
+<section id="localStorage">
+  <h2>Local Storage</h2>
+  <script type="text/javascript"> 
+    if( localStorage.hits ) 
+    localStorage.hits = Number(localStorage.hits) +1; 
+    else 
+    localStorage.hits = 1; 
+    document.write("Total Hits :" + localStorage.hits ); 
+    </script> 
+  <p>Frissítsd az oldalt. Bezárás után is megőrzi az értéket.</p>
 </section>
 
-    <footer>
-        <p>Ondó Vivien - O4NEQB </p>
-        <p>Trinyik Anikó - EA1HYA </p>
-    </footer>
+<!-- Web worker -->
+<section id="webWorker">
+  <h2>Web Worker</h2>
+  <p><button onclick="bigLoop()">Hosszú ciklus</button>
+     <button onclick="sayHello()">Csak egy üdvözlés</button></p>
+     <script> 
+        function bigLoop(){ 
+        for (var i = 0; i <= 10000000000; i += 1)   
+        var j = i; 
+        alert("Completed " + j + "iterations" ); 
+        } 
+        function sayHello(){ 
+        alert("Üdvözlöm a Webprogramozás beadandó oldalunkon" ); 
+        } 
+        </script> 
+</section>
 
-    <script>
-        function saveData() {
-            localStorage.setItem('username', 'JohnDoe');
-            alert('Adatok elmentve!');
-        }
+<!-- Session storage, ezt így lehetne megvalósítani, de a feladatleírásban az szerepel, hogy nemm lehet php-t használni
+<section id="sse">
+  <h2>Server-Sent Events (SSE)</h2>
+  <div id="result"></div>
+  <script> 
+    if(typeof(EventSource) !== "undefined") { 
+    var source = new EventSource("demo_sse.php"); 
+    source.onmessage = function(event) { 
+    document.getElementById("result").innerHTML += event.data + "<br>"; 
+    }; 
+    } else 
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events..."; 
+    </script> 
+</section> 
+-->
 
-        function loadData() {
-            const username = localStorage.getItem('username');
-            document.getElementById('storageOutput').textContent = 'Mentett név: ' + username;
-        }
-    </script>
+<!-- Drag and drop -->
+<section id="dragDrop">
+  <h2>Drag and Drop</h2>
+  <p>Húzd be a képet a szürke területre:</p>
+  <div id="dropTarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <img id="dragImage" src="http://kutyas.jatekvan.hu/kepek/n_kutyas7.gif" draggable="true" ondragstart="drag(event)" width="400" height="300" alt="NJE Kép">
+  <script>
+    function allowDrop(ev) { ev.preventDefault(); }
+    function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+    function drop(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+  </script>
+</section>
+
+<!-- Canvas -->
+<section id="canvas">
+  <h2>Canvas</h2>
+  <canvas id="mycanvas" width="150" height="150"></canvas>
+  <script>
+    function drawShape() {
+      const canvas = document.getElementById('mycanvas');
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillRect(25, 25, 100, 100);
+        ctx.clearRect(45, 45, 60, 60);
+        ctx.strokeRect(50, 50, 50, 50);
+      } else {
+        alert("A böngésződ nem támogatja a Canvas-t.");
+      }
+    }
+    drawShape();
+  </script>
+</section>
+
+<!-- SVG -->
+<section id="svg">
+  <h2>SVG</h2>
+  <svg width="100" height="100">
+    <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  </svg>
+  <svg width="400" height="100">
+    <rect width="400" height="100" style="fill:blue;stroke-width:10;stroke:black" />
+  </svg>
+  <svg width="400" height="180">
+    <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
+          style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+  </svg>
+  <svg width="300" height="200">
+    <polygon points="100,10 40,198 190,78 10,78 160,198"
+             style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+  </svg>
+  <svg height="130" width="500">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+        <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+    <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">SVG</text>
+  </svg>
+</section>
+
+<script>
+  function showSection(id) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+      section.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Alapértelmezett szekció megjelenítése
+  showSection('sessionStorage');
+</script>
+
+<footer>
+        
+    <p>Ondó Vivienn - O4NEQB </p>
+    <p>Trinyik Anikó - EA1HYA </p>
+</footer>
+
 </body>
 </html>
