@@ -25,15 +25,40 @@
     canvas { border: 1px solid red; }
     #dropTarget { width: 400px; height: 300px; border: 1px solid #aaa; margin-top: 10px; }
   </style>
+    <meta charset="UTF-8">
+    <title>HTML5 Menük</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button.nav-btn {
+      margin: 5px; padding: 10px 15px;
+      background-color: #007BFF; color: white;
+      border: none; border-radius: 5px;
+      cursor: pointer;
+    }
+    button.nav-btn:hover {
+      background-color: #0056b3;
+    }
+    section {
+      display: none;
+      margin-top: 30px;
+    }
+    section.active {
+      display: block;
+    }
+    canvas { border: 1px solid red; }
+    #dropTarget { width: 400px; height: 300px; border: 1px solid #aaa; margin-top: 10px; }
+  </style>
 </head>
 <body>
- 
+
     <header>
         <h1>HTML5</h1>
+        <h1>HTML5</h1>
     </header>
- 
+
 <nav>
- 
+
     <ul>
         <li><a href="index.html" >Főoldal</a></li>
         <li><a href="table.html">Táblázat</a></li>
@@ -44,8 +69,8 @@
         <li><a href="react.html">React</a></li>
     </ul>
 </nav>
- 
 
+<!-- Gombos navigáció -->
 <div id="navigation">
   <button class="nav-btn" onclick="showSection('sessionStorage')">Session Storage</button>
   <button class="nav-btn" onclick="showSection('localStorage')">Local Storage</button>
@@ -55,69 +80,67 @@
   <button class="nav-btn" onclick="showSection('canvas')">Canvas</button>
   <button class="nav-btn" onclick="showSection('svg')">SVG</button>
 </div>
- 
 
+<!-- Session storage -->
 <section id="sessionStorage">
   <h2>Session Storage</h2>
-  <script>
-    if (sessionStorage.hits)
-      sessionStorage.hits = Number(sessionStorage.hits) + 1;
-    else
-      sessionStorage.hits = 1;
-    document.write("<p>Session Hits: " + sessionStorage.hits + "</p>");
-  </script>
+  <script type="text/javascript"> 
+    if( sessionStorage.hits ) 
+    sessionStorage.hits = Number(sessionStorage.hits) +1; 
+    else 
+    sessionStorage.hits = 1; 
+    document.write("Total Hits :" + sessionStorage.hits ); 
+    </script> 
   <p>Frissítsd az oldalt, hogy növeld a számlálót. Ha bezárod és újra megnyitod, újrakezdődik.</p>
 </section>
- 
+
+<!-- Local storage -->
 <section id="localStorage">
   <h2>Local Storage</h2>
-  <script>
-    if (localStorage.hits)
-      localStorage.hits = Number(localStorage.hits) + 1;
-    else
-      localStorage.hits = 1;
-    document.write("<p>Local Hits: " + localStorage.hits + "</p>");
-  </script>
+  <script type="text/javascript"> 
+    if( localStorage.hits ) 
+    localStorage.hits = Number(localStorage.hits) +1; 
+    else 
+    localStorage.hits = 1; 
+    document.write("Total Hits :" + localStorage.hits ); 
+    </script> 
   <p>Frissítsd az oldalt. Bezárás után is megőrzi az értéket.</p>
 </section>
- 
+
+<!-- Web worker -->
 <section id="webWorker">
   <h2>Web Worker</h2>
   <p><button onclick="bigLoop()">Hosszú ciklus</button>
      <button onclick="sayHello()">Csak egy üdvözlés</button></p>
-  <script>
-    function bigLoop() {
-      if (typeof (Worker) !== "undefined") {
-        const worker = new Worker("bigLoop.js");
-        worker.onmessage = function (event) {
-          alert("Lefutott " + event.data + " ismétlés");
-        };
-      } else {
-        alert("A böngésződ nem támogatja a Web Workert.");
-      }
-    }
- 
-    function sayHello() {
-      alert("Üdvözlöm a Webprogramozás beadandónk oldalán!");
-    }
-  </script>
+     <script> 
+        function bigLoop(){ 
+        for (var i = 0; i <= 10000000000; i += 1)   
+        var j = i; 
+        alert("Completed " + j + "iterations" ); 
+        } 
+        function sayHello(){ 
+        alert("Üdvözlöm a Webprogramozás beadandó oldalunkon" ); 
+        } 
+        </script> 
 </section>
- 
+
+<!-- Session storage, ezt így lehetne megvalósítani, de a feladatleírásban az szerepel, hogy nemm lehet php-t használni
 <section id="sse">
   <h2>Server-Sent Events (SSE)</h2>
   <div id="result"></div>
-  <script>
-    if (typeof (EventSource) !== "undefined") {
-      const source = new EventSource("demo_sse.php");
-      source.onmessage = function (event) {
-        document.getElementById("result").innerHTML += event.data + "<br>";
-      };
-    } else {
-      document.getElementById("result").innerHTML = "A böngésző nem támogatja az SSE-t.";
-    }
-  </script>
-</section>
- 
+  <script> 
+    if(typeof(EventSource) !== "undefined") { 
+    var source = new EventSource("demo_sse.php"); 
+    source.onmessage = function(event) { 
+    document.getElementById("result").innerHTML += event.data + "<br>"; 
+    }; 
+    } else 
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events..."; 
+    </script> 
+</section> 
+-->
+
+<!-- Drag and drop -->
 <section id="dragDrop">
   <h2>Drag and Drop</h2>
   <p>Húzd be a képet a szürke területre:</p>
@@ -133,7 +156,8 @@
     }
   </script>
 </section>
- 
+
+<!-- Canvas -->
 <section id="canvas">
   <h2>Canvas</h2>
   <canvas id="mycanvas" width="150" height="150"></canvas>
@@ -152,7 +176,8 @@
     drawShape();
   </script>
 </section>
- 
+
+<!-- SVG -->
 <section id="svg">
   <h2>SVG</h2>
   <svg width="100" height="100">
@@ -180,7 +205,7 @@
     <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">SVG</text>
   </svg>
 </section>
- 
+
 <script>
   function showSection(id) {
     const sections = document.querySelectorAll('section');
@@ -189,18 +214,16 @@
     });
     document.getElementById(id).classList.add('active');
   }
- 
-  
+
+  // Alapértelmezett szekció megjelenítése
   showSection('sessionStorage');
 </script>
- 
+
 <footer>
-       
+        
     <p>Ondó Vivienn - O4NEQB </p>
     <p>Trinyik Anikó - EA1HYA </p>
 </footer>
- 
+
 </body>
 </html>
- 
- 
