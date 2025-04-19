@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>REACT</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+  <style>
+    body {
+      text-align: center;
+      margin-top: 50px;
+      font-family: sans-serif;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+        <h1>REACT</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Főoldal</a></li>
+            <li><a href="table.html">Táblázat</a></li>
+            <li><a href="Html5.html">HTML5 Menük</a></li>
+            <li><a href="chartjs.html" >ChartJS Menü</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="react.html" class="active">React</a></li>
+        </ul>
+    </nav>
+    
+  <h1>Válassz alkalmazást</h1>
+  <button onclick="openApp('calculator')">Számológép</button>
+  <button onclick="openApp('counter')">Számláló játék</button>
+
+  <script>
+    function openApp(app) {
+      window.open(`index2.html?app=${app}`, '_blank');
+    }
+  </script>
+  <footer>
+        
+    <p>Ondó Vivienn - O4NEQB </p>
+    <p>Trinyik Anikó - EA1HYA </p>
+</footer>
+</body>
+</html>
