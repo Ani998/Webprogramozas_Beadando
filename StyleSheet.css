@@ -47,7 +47,7 @@ nav {
         }
         
         nav a:hover {
-            color: #ddd; /* Vagy bármilyen más hover szín */
+            color: #ddd; 
         }
 
 footer {
@@ -78,7 +78,7 @@ footer {
 }
 
 .form-row label {
-    width: 120px; /* szélesebb, hogy minden label elférjen */
+    width: 120px; 
     font-weight: bold;
     text-align: left;
 }
