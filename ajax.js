@@ -1,7 +1,6 @@
 const API_URL = "http://gamf.nhely.hu/ajax2/";
-const code = "O4NEQBEA1HYA"; // Neptun + egyedi azonosító
+const code = "BBBBBBefg456"; // Neptun kódod + saját azonosítód
 
-// ✅ Validáció: mezők nem lehetnek üresek, és a név max 30 karakter
 function validateInputs() {
     const name = document.getElementById("name").value.trim();
     const height = document.getElementById("height").value.trim();
@@ -20,11 +19,8 @@ function validateInputs() {
     return true;
 }
 
-// 🔄 Adatok betöltése és kiírása
 function readData() {
-    const data = new URLSearchParams();
-    data.append("op", "read");
-    data.append("code", code);
+    const data = new URLSearchParams({ op: "read", code });
 
     fetch(API_URL, {
         method: "POST",
@@ -33,9 +29,12 @@ function readData() {
     .then(res => res.json())
     .then(response => {
         const list = response.list;
-        let output = "";
-        let total = 0;
-        let max = 0;
+if (list && list.length > 0) {
+    // feldolgozás
+} else {
+    alert("Nincs megjeleníthető adat.");
+}
+        let output = "", total = 0, max = 0;
 
         list.forEach(item => {
             output += `
@@ -58,7 +57,6 @@ function readData() {
     });
 }
 
-// ➕ Létrehozás (Create)
 function createData() {
     if (!validateInputs()) return;
 
@@ -66,12 +64,7 @@ function createData() {
     const height = document.getElementById("height").value;
     const weight = document.getElementById("weight").value;
 
-    const data = new URLSearchParams();
-    data.append("op", "create");
-    data.append("code", code);
-    data.append("name", name);
-    data.append("height", height);
-    data.append("weight", weight);
+    const data = new URLSearchParams({ op: "create", code, name, height, weight });
 
     fetch(API_URL, {
         method: "POST",
@@ -79,7 +72,7 @@ function createData() {
     })
     .then(res => res.json())
     .then(response => {
-        if (response && response > 0) {
+        if (response && response.body && response.body.status === "ok") {
             alert("✅ Sikeresen hozzáadva!");
             readData();
         } else {
@@ -88,14 +81,11 @@ function createData() {
     });
 }
 
-// 🔄 Adatok lekérdezése ID alapján (Update előkészítése)
 function getDataForId() {
     const id = document.getElementById("id").value;
     if (!id) return alert("Adj meg egy ID-t!");
 
-    const data = new URLSearchParams();
-    data.append("op", "read");
-    data.append("code", code);
+    const data = new URLSearchParams({ op: "read", code });
 
     fetch(API_URL, {
         method: "POST",
@@ -103,7 +93,7 @@ function getDataForId() {
     })
     .then(res => res.json())
     .then(response => {
-        const item = response.list.find(i => i.id === id);
+        const item = response.list.find(i => parseInt(i.id) === parseInt(id));
         if (!item) return alert("❌ Nincs ilyen ID!");
 
         document.getElementById("name").value = item.name;
@@ -112,7 +102,6 @@ function getDataForId() {
     });
 }
 
-// ✏️ Módosítás (Update)
 function updateData() {
     if (!validateInputs()) return;
 
@@ -123,13 +112,7 @@ function updateData() {
     const height = document.getElementById("height").value;
     const weight = document.getElementById("weight").value;
 
-    const data = new URLSearchParams();
-    data.append("op", "update");
-    data.append("code", code);
-    data.append("id", id);
-    data.append("name", name);
-    data.append("height", height);
-    data.append("weight", weight);
+    const data = new URLSearchParams({ op: "update", code, id, name, height, weight });
 
     fetch(API_URL, {
         method: "POST",
@@ -137,16 +120,15 @@ function updateData() {
     })
     .then(res => res.json())
     .then(response => {
-        if (response && response > 0) {
+        if (response && response.body && response.body.status === "ok") {
             alert("✅ Sikeres módosítás!");
             readData();
         } else {
             alert("❌ Nem sikerült módosítani!");
-        }
+        }s
     });
 }
 
-// ❌ Törlés több ID alapján (checkbox)
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("deleteForm").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -160,22 +142,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selected.forEach(input => {
             const id = input.value;
-            const data = new URLSearchParams();
-            data.append("op", "delete");
-            data.append("code", code);
-            data.append("id", id);
+            const data = new URLSearchParams({ op: "delete", code, id });
 
             fetch(API_URL, {
                 method: "POST",
                 body: data
             })
             .then(res => res.json())
-            .then(() => {
-                readData();
+            .then(response => {
+                if (response.rowCount > 0) {
+                    readData();
+                } else {
+                    alert(`❌ Hiba történt az ID ${id} törlésekor.`);
+                }
             });
         });
     });
 
-    // 🔁 Automatikus betöltés oldalinduláskor
     readData();
 });

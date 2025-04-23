@@ -65,6 +65,37 @@
     </ul>
 </nav>
 
+<!-- Leírás -->
+
+<aside >
+    <p>Ebben a menüpontban a következő témákhoz készítettünk 1-1 példát:</p>
+    <ul>
+        <li>
+            Session Storage, 
+        </li>
+        <li>
+            Local Storage
+        </li>
+        <li>
+            Web Worker
+        </li>
+        <li>SSE</li>
+        <li>
+            Drag & Drop
+        </li>
+        <li>
+            Canvas 
+        </li>
+        <li>
+            SVG
+        </li>
+    </ul>
+</aside>
+<div>
+    <p>
+        Az egyes példákat a megfelelő gombra kattintva tekintheti meg.
+    </p>
+</div>
 <!-- Gombos navigáció -->
 <div id="navigation">
   <button class="nav-btn" onclick="showSection('sessionStorage')">Session Storage</button>
@@ -119,21 +150,20 @@
         </script> 
 </section>
 
-<!-- Session storage, ezt így lehetne megvalósítani, de a feladatleírásban az szerepel, hogy nemm lehet php-t használni
+<!-- Session storage, ezt így lehetne megvalósítani, de a feladatleírásban az szerepel, hogy nemm lehet php-t használni-->
 <section id="sse">
-  <h2>Server-Sent Events (SSE)</h2>
-  <div id="result"></div>
-  <script> 
-    if(typeof(EventSource) !== "undefined") { 
-    var source = new EventSource("demo_sse.php"); 
-    source.onmessage = function(event) { 
-    document.getElementById("result").innerHTML += event.data + "<br>"; 
-    }; 
-    } else 
-    document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events..."; 
-    </script> 
-</section> 
--->
+    <h2>Server-Sent Events (SSE)</h2>
+    <div id="result"></div>
+    <script> 
+      if(typeof(EventSource) !== "undefined") { 
+      var source = new EventSource("demo_sse.php"); 
+      source.onmessage = function(event) { 
+      document.getElementById("result").innerHTML += event.data + "<br>"; 
+      }; 
+      } else 
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events..."; 
+      </script> 
+  </section> 
 
 <!-- Drag and drop -->
 <section id="dragDrop">

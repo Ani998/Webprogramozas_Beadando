@@ -54,9 +54,20 @@
 <div class="content">
     <h2>Adatok kezelése</h2>
 
+         <!-- Leírás -->
+
+    <aside>
+        <p>
+            Ebben a menüpontban a CRUD funkcionalitás (Create, Read, Update, Delete) megvalósítását mutatjuk be. 
+        </p>
+     </aside>
+
     <!-- Szűrőmező a táblázat felett -->
     <label for="search">Szűrés:</label>
     <input type="text" id="search" placeholder="Keresés a táblázatban..." onkeyup="filterTable()">
+
+
+
 
     <table id="data-table">
         <thead>
@@ -72,6 +83,7 @@
         </tbody>
     </table>
 
+     <!-- A táblázat  -->
     <section>
         <form id="data-form">
             <div class="form-group">
@@ -86,7 +98,7 @@
 
             <div class="form-group">
                 <label for="height">Magasság:</label>
-                <input type="number" id="height" required min="0">
+                <input type="number" id="height" required min="0" max="230">
             </div>
 
             <div class="form-group">
@@ -108,7 +120,5 @@
 </body>
 </html>
 
-
-<!-- Ez egy komment Vivitől-->
 
     

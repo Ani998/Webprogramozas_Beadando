@@ -37,9 +37,15 @@
     </nav>
     
   <h1>Válassz alkalmazást</h1>
-  <button onclick="openApp('calculator')">Számológép</button>
-  <button onclick="openApp('counter')">Számláló játék</button>
+  <div>
+    Ezen az oldalon a Számológép és a Számláló játék alkalmazásokat éri el. Az alkalmazás megnyitásához kattintson a megfelelő gombra!
+  </div>
+  <aside> 
+    <button onclick="openApp('calculator')">Számológép</button>
+    <button onclick="openApp('counter')">Számláló játék</button>
+  </aside>
 
+ 
   <script>
     function openApp(app) {
       window.open(`index2.html?app=${app}`, '_blank');
