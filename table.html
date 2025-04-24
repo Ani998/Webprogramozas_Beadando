@@ -1,124 +1,78 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="utf-8">
-    <title>Táblázatok</title>
-    <link type="text/css" rel="stylesheet" href="StyleSheet.css">
-    <style>
-        /* A form szép igazításához */
-        form {
-            max-width: 500px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .form-group label {
-            width: 120px;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            flex: 1;
-            padding: 5px;
-        }
-
-        button[type="submit"] {
-            margin-top: 10px;
-            padding: 8px 15px;
-            font-size: 16px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Táblázatos CRUD</title>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
+  <script src="table.js" defer></script>
+  <link rel="stylesheet" href="StyleSheet.css">
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+    }
+    input, button {
+      margin: 5px;
+    }
+  </style>
 </head>
 <body>
-<header>
-    <h1>CRUD táblázat</h1>
-</header>
-
-<nav>
+    <header>
+        <h1>CRUD Táblázat</h1>
+    </header>
+  
+  <nav>
     <ul>
         <li><a href="index.html">Főoldal</a></li>
         <li><a href="table.html" class="active">Táblázat</a></li>
         <li><a href="Html5.html">HTML5 Menük</a></li>
         <li><a href="chartjs.html">ChartJS Menü</a></li>
-        <li><a href="ajax.html">AJAX</a></li>
-        <li><a href="oojs.html">OOJS</a></li>
+        <li><a href="ajax.html" >AJAX</a></li>
+        <li><a href="oojs.html" >OOJS</a></li>
         <li><a href="react.html">React</a></li>
     </ul>
 </nav>
 
-<div class="content">
-    <h2>Adatok kezelése</h2>
+  <div>
+    <input type="text" id="id" placeholder="ID (Update-hez/törléshez)">
+    <br>
 
-         <!-- Leírás -->
+    <input type="text" id="name" placeholder="Név (2-30 karakter)" minlength="2" maxlength="30" required>
+    <input type="number" id="height" placeholder="Magasság (max 230)" max="230" maxlength="30" required>
+    <input type="number" id="weight" placeholder="Súly (max 635)" max="635" maxlength="30" required>
 
-    <aside>
-        <p>
-            Ebben a menüpontban a CRUD funkcionalitás (Create, Read, Update, Delete) megvalósítását mutatjuk be. 
-        </p>
-     </aside>
+    <button onclick="createRecord()">Hozzáadás</button>
+    <button onclick="updateRecord()">Módosítás</button>
+    <button onclick="deleteRecord()">Törlés</button>
+  </div>
 
-    <!-- Szűrőmező a táblázat felett -->
-    <label for="search">Szűrés:</label>
-    <input type="text" id="search" placeholder="Keresés a táblázatban..." onkeyup="filterTable()">
+  <div>
+    <input type="text" id="searchInput" placeholder="Keresés..." oninput="filterTable()">
+  </div>
 
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">ID ↑↓</th>
+        <th onclick="sortTable(1)">Név ↑↓</th>
+        <th onclick="sortTable(2)">Magasság ↑↓</th>
+        <th onclick="sortTable(3)">Súly ↑↓</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
 
+    </tbody>
+  </table>
 
+  <div id="feedback"></div>
 
-    <table id="data-table">
-        <thead>
-            <tr>
-                <th>Név <button onclick="sortTable(0)">↑↓</button></th>
-                <th>Életkor <button onclick="sortTable(1)">↑↓</button></th>
-                <th>Magasság <button onclick="sortTable(2)">↑↓</button></th>
-                <th>Email cím <button onclick="sortTable(3)">↑↓</button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- A táblázat sorai itt jelennek meg dinamikusan -->
-        </tbody>
-    </table>
-
-     <!-- A táblázat  -->
-    <section>
-        <form id="data-form">
-            <div class="form-group">
-                <label for="name">Név:</label>
-                <input type="text" id="name" required minlength="4">
-            </div>
-
-            <div class="form-group">
-                <label for="age">Életkor:</label>
-                <input type="number" id="age" required min="1" max="120">
-            </div>
-
-            <div class="form-group">
-                <label for="height">Magasság:</label>
-                <input type="number" id="height" required min="0" max="230">
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email cím:</label>
-                <input type="email" id="email">
-            </div>
-
-            <button type="submit">Adat hozzáadása</button>
-        </form>
-    </section>
-
-    <script src="table.js"></script>
-</div>
-
-<footer>
-    <p>Ondó Vivien - O4NEQB</p>
-    <p>Trinyik Anikó - EA1HYA</p>
+  <footer>
+        
+    <p>Ondó Vivienn - O4NEQB </p>
+    <p>Trinyik Anikó - EA1HYA </p>
 </footer>
 </body>
 </html>
-
-
-    
