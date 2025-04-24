@@ -14,6 +14,7 @@ function showFeedback(message) {
     document.getElementById("feedback").innerText = message;
 }
 
+// Read 
 function readData() {
     fetch(API_URL, {
         method: "POST",
@@ -42,6 +43,7 @@ function readData() {
     });
 }
 
+//Create
 function createData() {
     const name = document.getElementById("name").value;
     const height = document.getElementById("height").value;
@@ -59,6 +61,7 @@ function createData() {
     .then(res => showFeedback(res === 1 ? "Sikeres hozzáadás!" : "Hiba a hozzáadás során!"));
 }
 
+//Update
 function updateData() {
     const id = document.getElementById("id").value;
     const name = document.getElementById("name").value;
@@ -77,6 +80,7 @@ function updateData() {
     .then(res => showFeedback(res === 1 ? "Sikeres módosítás!" : "Hiba a módosítás során!"));
 }
 
+//Delete
 function deleteData() {
     const id = document.getElementById("deleteId").value;
     const body = `op=delete&id=${id}&code=${encodeURIComponent(USER_CODE)}`;
@@ -88,6 +92,7 @@ function deleteData() {
     .then(res => res.json())
     .then(res => showFeedback(res === 1 ? "Sikeres törlés!" : "Hiba a törlés során!"));
 }
+
 
 function getDataForId() {
     const id = document.getElementById("id").value;
