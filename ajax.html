@@ -2,14 +2,17 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>AJAX</title>
-    <link rel="stylesheet" href="StyleSheet.css">
+    <title>AJAX CRUD alkalmazás</title>
+    <link type="text/css" rel="stylesheet" href="StyleSheet.css">
+    <script src="ajax.js" defer></script>
 </head>
+
+
 <body>
     <header>
-        <h1>AJAX - CRUD műveletekkel</h1>
+        <h2>AJAX</h2>
     </header>
-
+    
     <nav>
         <ul>
             <li><a href="index.html">Főoldal</a></li>
@@ -17,53 +20,43 @@
             <li><a href="Html5.html">HTML5 Menük</a></li>
             <li><a href="chartjs.html">ChartJS Menü</a></li>
             <li><a href="ajax.html" class="active">AJAX</a></li>
-            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="oojs.html" >OOJS</a></li>
             <li><a href="react.html">React</a></li>
         </ul>
     </nav>
 
-    <div class="content">
-        <h2>AJAX - CRUD űrlap</h2>
+    <!-- Create / Update űrlap -->
+    <div>
+        <h2>Adat hozzáadása / módosítása</h2>
 
-        <div class="form-container">
-            <div class="form-row">
-                <label>ID:</label>
-                <input type="number" id="id" required minlength="4"><br>
-            </div>
 
-            <div class="form-row">
-                <label>Név:</label>
-                <input type="text" id="name" required minlength="4"><br>
-            </div>
-
-            <div class="form-row">
-                <label>Magasság(cm):</label>
-                <input type="number" id="height" required min="20" max="220"><br>
-            </div>
-
-            <div class="form-row">
-                <label>Súly:</label>
-                <input type="number" id="weight" required min="0" max="610"><br>
-            </div>
-
-            <button onclick="createData()">Hozzáadás</button>
-            <button onclick="getDataForId()">Adatok lekérése ID alapján</button>
-            <button onclick="updateData()">Módosítás</button>
-
-            <h3>Adatok:</h3>
-            <form id="deleteForm">
-                <div id="dataOutput"></div>
-                <div id="statsOutput" style="margin-top: 10px;"></div>
-                <button type="submit">Kijelölt törlése</button>
-            </form>
-        </div>
+        <input type="text" id="name" placeholder="Név (max 30)">
+        <input type="text" id="height" placeholder="Magasság (max 30)">
+        <input type="text" id="weight" placeholder="Súly (max 30)">
+        <button onclick="createData()">Hozzáadás</button>
+        <button onclick="updateData()">Módosítás</button>
     </div>
 
-    <footer>
-        <p>Ondó Vivien - O4NEQB</p>
-        <p>Trinyik Anikó - EA1HYA</p>
-    </footer>
+    <!-- Delete -->
+    <div>
+        <h2>Adat törlése</h2>
+        <input type="text" id="deleteId" placeholder="ID törléshez">
+        <button onclick="deleteData()">Törlés</button>
+    </div>
 
-    <script src="ajax.js"></script>
+    <!-- Read -->
+    <div>
+        <h2>Adatok listázása</h2>
+        <button onclick="readData()">Adatok lekérése</button>
+        <div id="dataList"></div>
+        <div id="heightStats"></div>
+    </div>
+
+    <div id="feedback"></div>
+
+    <footer>
+        <p>Ondó Vivien - O4NEQB </p>
+        <p>Trinyik Anikó - EA1HYA </p>
+    </footer>
 </body>
 </html>

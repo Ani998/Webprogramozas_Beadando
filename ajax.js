@@ -1,163 +1,111 @@
 const API_URL = "http://gamf.nhely.hu/ajax2/";
-const code = "BBBBBBefg456"; // Neptun kódod + saját azonosítód
+const USER_CODE = "EA1HYA abc123";
 
-function validateInputs() {
-    const name = document.getElementById("name").value.trim();
-    const height = document.getElementById("height").value.trim();
-    const weight = document.getElementById("weight").value.trim();
-
-    if (!name || !height || !weight) {
-        alert("Minden mezőt ki kell tölteni!");
-        return false;
+function validateInputs(name, height, weight) {
+    const maxLength = 30;
+    if (!name || !height || !weight) return "A mezők nem lehetnek üresek!";
+    if (name.length > maxLength || height.length > maxLength || weight.length > maxLength) {
+        return "A mezők max 30 karakter hosszúak lehetnek!";
     }
+    return null;
+}
 
-    if (name.length > 30) {
-        alert("A név maximum 30 karakter lehet!");
-        return false;
-    }
-
-    return true;
+function showFeedback(message) {
+    document.getElementById("feedback").innerText = message;
 }
 
 function readData() {
-    const data = new URLSearchParams({ op: "read", code });
-
     fetch(API_URL, {
         method: "POST",
-        body: data
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `op=read&code=${encodeURIComponent(USER_CODE)}`
     })
     .then(res => res.json())
-    .then(response => {
-        const list = response.list;
-if (list && list.length > 0) {
-    // feldolgozás
-} else {
-    alert("Nincs megjeleníthető adat.");
-}
-        let output = "", total = 0, max = 0;
-
-        list.forEach(item => {
-            output += `
-                <label>
-                    <input type="checkbox" name="deleteIds" value="${item.id}">
-                    ID: ${item.id} | Név: ${item.name} | Magasság: ${item.height} cm | Súly: ${item.weight} kg
-                </label><br>
-            `;
-            total += parseFloat(item.height);
-            if (parseFloat(item.height) > max) max = parseFloat(item.height);
+    .then(data => {
+        const listDiv = document.getElementById("dataList");
+        const heightStatsDiv = document.getElementById("heightStats");
+        listDiv.innerHTML = "";
+        let totalHeight = 0;
+        let maxHeight = 0;
+        data.list.forEach(item => {
+            listDiv.innerHTML += `<p>ID: ${item.id}, Név: ${item.name}, Magasság: ${item.height}, Súly: ${item.weight}</p>`;
+            let h = parseFloat(item.height) || 0;
+            totalHeight += h;
+            if (h > maxHeight) maxHeight = h;
         });
-
-        document.getElementById("dataOutput").innerHTML = output;
-        document.getElementById("statsOutput").innerHTML = `
-            <strong>Statisztika:</strong><br>
-            Összmagasság: ${total} cm<br>
-            Átlag: ${(total / list.length).toFixed(2)} cm<br>
-            Legnagyobb: ${max} cm
+        const avgHeight = data.list.length > 0 ? totalHeight / data.list.length : 0;
+        heightStatsDiv.innerHTML = `
+            <p>Magasság összesen: ${totalHeight}</p>
+            <p>Átlag magasság: ${avgHeight.toFixed(2)}</p>
+            <p>Legnagyobb magasság: ${maxHeight}</p>
         `;
     });
 }
 
 function createData() {
-    if (!validateInputs()) return;
-
     const name = document.getElementById("name").value;
     const height = document.getElementById("height").value;
     const weight = document.getElementById("weight").value;
+    const validation = validateInputs(name, height, weight);
+    if (validation) return showFeedback(validation);
 
-    const data = new URLSearchParams({ op: "create", code, name, height, weight });
-
+    const body = `op=create&name=${encodeURIComponent(name)}&height=${encodeURIComponent(height)}&weight=${encodeURIComponent(weight)}&code=${encodeURIComponent(USER_CODE)}`;
     fetch(API_URL, {
         method: "POST",
-        body: data
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
     })
     .then(res => res.json())
-    .then(response => {
-        if (response && response.body && response.body.status === "ok") {
-            alert("✅ Sikeresen hozzáadva!");
-            readData();
-        } else {
-            alert("❌ Hiba a hozzáadás során!");
-        }
-    });
+    .then(res => showFeedback(res === 1 ? "Sikeres hozzáadás!" : "Hiba a hozzáadás során!"));
+}
+
+function updateData() {
+    const id = document.getElementById("id").value;
+    const name = document.getElementById("name").value;
+    const height = document.getElementById("height").value;
+    const weight = document.getElementById("weight").value;
+    const validation = validateInputs(name, height, weight);
+    if (validation) return showFeedback(validation);
+
+    const body = `op=update&id=${id}&name=${encodeURIComponent(name)}&height=${encodeURIComponent(height)}&weight=${encodeURIComponent(weight)}&code=${encodeURIComponent(USER_CODE)}`;
+    fetch(API_URL, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+    })
+    .then(res => res.json())
+    .then(res => showFeedback(res === 1 ? "Sikeres módosítás!" : "Hiba a módosítás során!"));
+}
+
+function deleteData() {
+    const id = document.getElementById("deleteId").value;
+    const body = `op=delete&id=${id}&code=${encodeURIComponent(USER_CODE)}`;
+    fetch(API_URL, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+    })
+    .then(res => res.json())
+    .then(res => showFeedback(res === 1 ? "Sikeres törlés!" : "Hiba a törlés során!"));
 }
 
 function getDataForId() {
     const id = document.getElementById("id").value;
-    if (!id) return alert("Adj meg egy ID-t!");
-
-    const data = new URLSearchParams({ op: "read", code });
-
     fetch(API_URL, {
         method: "POST",
-        body: data
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `op=read&code=${encodeURIComponent(USER_CODE)}`
     })
     .then(res => res.json())
-    .then(response => {
-        const item = response.list.find(i => parseInt(i.id) === parseInt(id));
-        if (!item) return alert("❌ Nincs ilyen ID!");
-
-        document.getElementById("name").value = item.name;
-        document.getElementById("height").value = item.height;
-        document.getElementById("weight").value = item.weight;
-    });
-}
-
-function updateData() {
-    if (!validateInputs()) return;
-
-    const id = document.getElementById("id").value;
-    if (!id) return alert("Adj meg egy ID-t a módosításhoz!");
-
-    const name = document.getElementById("name").value;
-    const height = document.getElementById("height").value;
-    const weight = document.getElementById("weight").value;
-
-    const data = new URLSearchParams({ op: "update", code, id, name, height, weight });
-
-    fetch(API_URL, {
-        method: "POST",
-        body: data
-    })
-    .then(res => res.json())
-    .then(response => {
-        if (response && response.body && response.body.status === "ok") {
-            alert("✅ Sikeres módosítás!");
-            readData();
+    .then(data => {
+        const item = data.list.find(entry => entry.id === id);
+        if (item) {
+            document.getElementById("name").value = item.name;
+            document.getElementById("height").value = item.height;
+            document.getElementById("weight").value = item.weight;
+            showFeedback("Adatok betöltve.");
         } else {
-            alert("❌ Nem sikerült módosítani!");
-        }s
+            showFeedback("Nincs ilyen ID.");
+        }
     });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("deleteForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const selected = Array.from(document.querySelectorAll("input[name='deleteIds']:checked"));
-        if (selected.length === 0) {
-            alert("Jelölj ki legalább egy sort a törléshez!");
-            return;
-        }
-
-        if (!confirm("Biztosan törölni szeretnéd a kijelölt adatokat?")) return;
-
-        selected.forEach(input => {
-            const id = input.value;
-            const data = new URLSearchParams({ op: "delete", code, id });
-
-            fetch(API_URL, {
-                method: "POST",
-                body: data
-            })
-            .then(res => res.json())
-            .then(response => {
-                if (response.rowCount > 0) {
-                    readData();
-                } else {
-                    alert(`❌ Hiba történt az ID ${id} törlésekor.`);
-                }
-            });
-        });
-    });
-
-    readData();
-});
