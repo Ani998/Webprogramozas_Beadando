@@ -27,19 +27,21 @@
 
     <!-- Create / Update űrlap -->
     <div>
-        <h2>Adat hozzáadása / módosítása</h2>
+        <h2>ID megadása módosításhoz</h2>
+        <input type="text" id="id" placeholder="ID Update-hez">
 
+        <h2>Adatok hozzáadása</h2>
 
-        <input type="text" id="name" placeholder="Név (max 30)">
-        <input type="text" id="height" placeholder="Magasság (max 30)">
-        <input type="text" id="weight" placeholder="Súly (max 30)">
+        <input type="text" id="name" placeholder="Név">
+        <input type="text" id="height" required min="0" max="230" placeholder="Magasság">
+        <input type="text" id="weight" required min="0" max="635" placeholder="Súly">
         <button onclick="createData()">Hozzáadás</button>
         <button onclick="updateData()">Módosítás</button>
     </div>
 
     <!-- Delete -->
     <div>
-        <h2>Adat törlése</h2>
+        <h2>Adatok törlése</h2>
         <input type="text" id="deleteId" placeholder="ID törléshez">
         <button onclick="deleteData()">Törlés</button>
     </div>
