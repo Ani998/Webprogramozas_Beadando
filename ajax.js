@@ -14,7 +14,7 @@ function showFeedback(message) {
     document.getElementById("feedback").innerText = message;
 }
 
-// Read 
+// Read + statisztika
 function readData() {
     fetch(API_URL, {
         method: "POST",
