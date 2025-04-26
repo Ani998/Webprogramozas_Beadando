@@ -185,15 +185,16 @@
 <!-- Canvas -->
 <section id="canvas">
   <h2>Canvas</h2>
-  <canvas id="mycanvas" width="150" height="150"></canvas>
+  <canvas id="mycanvas" width="150" height="150"></canvas> <!-- ez a rajolási terület méretét adja meg, a Canvas területét -->
   <script>
     function drawShape() {
       const canvas = document.getElementById('mycanvas');
       if (canvas.getContext) {
         const ctx = canvas.getContext('2d');
-        ctx.fillRect(25, 25, 100, 100);
-        ctx.clearRect(45, 45, 60, 60);
-        ctx.strokeRect(50, 50, 50, 50);
+          ctx.fillRect(25,25,100,100); // ez egy fekete színnel kitöltött 100x100-as négyzetet rajzol Canva területének a bal felső sarkától 25 képponttal jobbra és 25 képponttal lefele kezdve
+             ctx.clearRect(45,45,60,60); //ez egy 60x60-as átlátszó négyzetet rajzol a Canva területének a bal felső sarkától 45 képponttal jobbra és 45 képponttal lefele kezdve
+             ctx.strokeRect(50,50,50,50); //ez egy négyzetnek a körvonalát rajzolja meg, Canva területének a bal felső sarkától 50 képponttal jobbra és 50 képponttal lefele kezdve
+
       } else {
         alert("A böngésződ nem támogatja a Canvas-t.");
       }
